@@ -1,0 +1,29 @@
+#!/bin/bash
+# echo "输入参数为:$1"
+if [ -z "$1" ]; then
+    echo "请输入参数!"
+    echo "Usage: v2ray [command]"
+    echo "Command:"
+    echo "  up    启动v2ray"
+    echo "  down  关闭v2ray"
+    exit 0 # 参数错误,退出,0为退出正确,其余1-255均为错误码
+fi
+
+function up() {
+    nohup /opt/v2ray-linux-64/v2ray -config /opt/v2ray-linux-64/doc/config.json >v2ray.log 2>&1 &
+    gsettings set org.gnome.system.proxy mode 'manual'
+    echo "启动成功!"
+}
+
+function down() {
+    gsettings set org.gnome.system.proxy mode 'none'
+    echo "关闭成功!"
+}
+
+if [ "$1" == "up" ]; then
+    up
+fi
+if [ "$1" == "down" ]; then
+    down
+fi
+exit 0
