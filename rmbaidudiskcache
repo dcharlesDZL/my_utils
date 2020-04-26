@@ -1,0 +1,2 @@
+rm /root/baidunetdisk/baidunetdiskdata.db
+rm /root/baidunetdisk/*/userConf.db
